@@ -1,0 +1,51 @@
+# Query type
+type Query {
+  info: String!
+  feed: [Link!]!
+  link(id: ID!): Link
+}
+
+# Mutation type
+type Mutation {
+  # SignUp
+  signup(email: String!, password: String!, name: String!): AuthPayload
+
+  # Login
+  login(email: String!, password: String!): AuthPayload
+
+  # Create a link
+  createLink(url: String!, description: String!): Link!
+
+  # Update a link
+  updateLink(id: ID!, description: String!, url: String!): Link
+
+  # Delete a link
+  deleteLink(id: ID!): Link
+}
+
+# AuthPayload type
+type AuthPayload {
+  token: String
+  user: User
+}
+
+# User type
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  links: [Link!]!
+}
+
+# link type
+type Link {
+  id: ID!
+  description: String!
+  url: String!
+  postedBy: User
+}
+
+# Subscription type
+type Subscription {
+  newLink: Link
+}
